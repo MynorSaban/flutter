@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/presentation/widgets/chat/her_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
+   final colors = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(4.0),
           child: CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://avatars.githubusercontent.com/u/174751586?s=400&u=fb8c49982359a2e78406be49717ea775d52d9afe&v=4',
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Q1MCXVsrVBfwT8lZ-DhbsnqLg-DdVRuvEaA6EGZ7JKNGTVu9CrONUKs&s=10',
             ),
           ),
         ),
-        title: const Text('bebe ♥'),
+        title: Text(
+          'bebe ♥',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: colors.primaryColor  , // Cambia el color según el tema
+          ),
+        ),
         centerTitle: false,
       ),
       body: _ChatView(),
@@ -41,9 +50,8 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-              
                 itemBuilder: (context, index) {
-                  return Text('Hola mundo : $index');
+                  return ( index % 2 == 0) ? HerMessageBubble() : MyMessageBubble();
                 },
               ),
             ),
