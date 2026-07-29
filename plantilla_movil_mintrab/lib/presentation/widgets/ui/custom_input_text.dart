@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'input_theme.dart';
 
 class CustomInputText extends StatelessWidget {
   final TextEditingController value;
   final String label;
-  final String? hintText;
+  final String? placeholder;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool isPassword;
   final TextInputType keyboardType;
+  final bool enabled;
   final String? Function(String?)? validator;
   final VoidCallback? onSuffixIconPressed;
 
@@ -15,11 +17,12 @@ class CustomInputText extends StatelessWidget {
     super.key,
     required this.value,
     required this.label,
-    this.hintText,
+    this.placeholder,
     this.prefixIcon,
     this.suffixIcon,
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
+    this.enabled = true,
     this.validator,
     this.onSuffixIconPressed,
   });
@@ -27,40 +30,25 @@ class CustomInputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-
     return TextFormField(
+      enabled: enabled,
       controller: value,
       obscureText: isPassword,
       keyboardType: keyboardType,
       validator: validator,
-      // Estilo del texto que escribe el usuario
       style: TextStyle(color: colors.onSurface),
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hintText,
-        // Icono al inicio del input
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: colors.primary) : null,
-        // Icono al final (útil para mostrar/ocultar contraseñas)
-        suffixIcon: suffixIcon != null 
+      decoration: inputDecoration(
+        colors: colors,
+        label: label,
+        hint: placeholder,
+        prefixIcon:
+            prefixIcon != null ? Icon(prefixIcon, color: colors.primary) : null,
+        suffixIcon: suffixIcon != null
             ? IconButton(
                 icon: Icon(suffixIcon, color: colors.primary),
                 onPressed: onSuffixIconPressed,
               )
             : null,
-        
-        // Diseños de los bordes basados en tu tema
-        filled: true,
-        fillColor: colors.surfaceContainerHighest.withValues(alpha: 0.3),
-      
-      
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: colors.primary, width: 2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: colors.error),
-        ),
       ),
     );
   }
