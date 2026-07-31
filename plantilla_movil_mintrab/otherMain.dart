@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantilla_movil_mintrab/config/app_theme.dart';
-import 'package:plantilla_movil_mintrab/core/storage/secure_storage.dart';
 import 'package:plantilla_movil_mintrab/presentation/layout/main_layout.dart';
-import 'package:plantilla_movil_mintrab/presentation/screens/home_screen.dart';
-import 'package:plantilla_movil_mintrab/presentation/screens/login_screen.dart';
 import 'package:plantilla_movil_mintrab/presentation/widgets/ui/button.dart';
 import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_alert_dialog.dart';
 import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_checkbox.dart';
@@ -13,6 +10,9 @@ import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_input_dat
 import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_input_text.dart';
 import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_input_text_area.dart';
 import 'package:plantilla_movil_mintrab/utils/cui_validator.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 void main() => runApp(const MyApp());
 
@@ -25,22 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Mintrab Template',
       debugShowCheckedModeBanner: false,
       theme: AppTheme(selectedColorIndex: 0).theme(),
-      home: FutureBuilder<String?>(
-        future: SecureStorage.instance.getAccessToken(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          }
-          final hasToken = snapshot.data != null;
-          print('-------------TOKEN ------------------');
-          print(hasToken);
-          print('------------- SEGURITY ------------------');
-          print(SecureStorage.instance.getAccessToken());
-          return hasToken ? const HomeScreen() : const LoginScreen();
-        },
-      ),
+      home: const MyHomePage(),
     );
   }
 }

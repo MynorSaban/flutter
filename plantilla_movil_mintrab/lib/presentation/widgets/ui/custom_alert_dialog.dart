@@ -6,7 +6,7 @@ abstract final class CustomAlertDialog {
   static Future<bool?> show({
     required BuildContext context,
     required String title,
-    required String message,
+    String? message,
     AlertType type = AlertType.info,
     String confirmLabel = 'Aceptar',
     String? cancelLabel,
@@ -25,7 +25,7 @@ abstract final class CustomAlertDialog {
         insetPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 24.0),
         icon: Icon(icon, size: 100, color: iconColor),
         title: Text(title, textAlign: TextAlign.center),
-        content: SizedBox(width: 350, child: Text(message, textAlign: TextAlign.justify)),
+        content: SizedBox(width: 350, child: Text(message??'', textAlign: TextAlign.justify)),
         actionsAlignment: MainAxisAlignment.center,
 
 

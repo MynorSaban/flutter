@@ -1,0 +1,27 @@
+{
+  "jti": "onrtro:d8f98d6c-42ee-4b36-8a31-3ae35d5855a1",
+  "iss": "https://ssomintrab.mintrabajo.gob.gt/realms/Interno",
+  "aud": "account",
+  "sub": "bd5a6e11-4735-4beb-b2d5-1acfe5d47449",
+  "typ": "Bearer",
+  "azp": "igt-client",
+  "sid": "7c2bd769-769f-4f48-9fe2-4d2160ea81fc",
+  "acr": "1",
+  "allowed-origins": ["https://igtdev.mintrabajo.gob.gt"],
+  "realm_access": {
+    "roles": ["default-roles-interno", "offline_access", "uma_authorization"]
+  },
+  "resource_access": {
+    "igt-client": { "roles": ["usuario"] },
+    "account": {
+      "roles": ["manage-account", "manage-account-links", "view-profile"]
+    }
+  },
+  "scope": "profile email",
+  "email_verified": true,
+  "name": "admin admin",
+  "preferred_username": "0000000000001",
+  "given_name": "admin",
+  "family_name": "admin",
+  "email": "user@example.com"
+}
