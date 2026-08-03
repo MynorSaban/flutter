@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../storage/secure_storage.dart';
 
@@ -26,22 +23,9 @@ class AuthService {
       },
        options: Options(contentType: 'application/x-www-form-urlencoded'),
     );
-    print('RESPUESTA DESDE EL AUTH SERVICE     ------- ${response}');
     await SecureStorage.instance.saveTokens(
       accessToken: response.data['access_token'] as String,
       refreshToken: response.data['refresh_token'] as String,
-    );
-  }
-  AuthService() {
-    _dio.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final client = HttpClient();
-        // Esto le dice a Flutter que ignore los problemas de certificados autofirmados
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) {
-          return true; 
-        };
-        return client;
-      },
     );
   }
 

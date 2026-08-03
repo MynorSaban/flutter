@@ -33,8 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      print('este el el dpi ${_usernameController.text}');
-      print('esta es la constrasenia ${_passwordController.text}');
       await _auth.login(
         username: _usernameController.text.trim(),
         password: _passwordController.text,
@@ -46,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     } on DioException catch (e) {
-      print('ESTE ES EL ERROR AL INICIAR');
       if (!mounted) return;
       final mensaje =
           e.response?.data?['error_description'] as String? ?? 'Error de conexion';

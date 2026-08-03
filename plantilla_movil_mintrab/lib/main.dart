@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:plantilla_movil_mintrab/config/app_theme.dart';
 import 'package:plantilla_movil_mintrab/core/storage/secure_storage.dart';
 import 'package:plantilla_movil_mintrab/presentation/layout/main_layout.dart';
@@ -14,7 +15,11 @@ import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_input_tex
 import 'package:plantilla_movil_mintrab/presentation/widgets/ui/custom_input_text_area.dart';
 import 'package:plantilla_movil_mintrab/utils/cui_validator.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -34,10 +39,6 @@ class MyApp extends StatelessWidget {
             );
           }
           final hasToken = snapshot.data != null;
-          print('-------------TOKEN ------------------');
-          print(hasToken);
-          print('------------- SEGURITY ------------------');
-          print(SecureStorage.instance.getAccessToken());
           return hasToken ? const HomeScreen() : const LoginScreen();
         },
       ),

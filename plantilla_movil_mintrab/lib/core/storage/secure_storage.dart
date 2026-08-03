@@ -35,9 +35,6 @@ class SecureStorage {
 
     final payload = base64Url.normalize(parts[1]);
     final decoded = utf8.decode(base64Url.decode(payload));
-    print('--------------------ESTO ES CUANDO DECODIFICA EL JWT----------------------');
-    print(decoded);
-    print('--------------------FINALIZA LA DECODIFICACION----------------------');
 
     return jsonDecode(decoded) as Map<String, dynamic>;
   }
